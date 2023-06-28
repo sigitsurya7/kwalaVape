@@ -44,7 +44,7 @@ class Banner extends ResourceController
                 $model->addBanner($data);
 
                 if ($model->affectedRows() > 0) {
-                    return $this->respondDeleted(['message' => 'Success'], 200);
+                    return $this->respond(['message' => 'Success'], 200);
                 } else {
                     return $this->fail('Error! Failed to delete post.', 500);
                 }
@@ -122,7 +122,7 @@ class Banner extends ResourceController
                 $model->deleteBan($id);
 
                 if ($model->affectedRows() > 0) {
-                    return $this->respondDeleted(['message' => 'Success'], 200);
+                    return $this->respond(['message' => 'Success'], 200);
                 } else {
                     return $this->fail('Error! Failed to delete post.', 500);
                 }

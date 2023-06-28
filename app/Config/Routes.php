@@ -55,6 +55,10 @@ $routes->group('v1', function($routes){
     $routes->put('kategori/(:num)', 'Kategori::updateKategori/$1');
     $routes->delete('kategori/(:num)', 'Kategori::deleteKategori/$1');
 
+    // Product
+    $routes->post('product', 'Product::addProduct');
+    $routes->get('product', 'Product::getProduct');
+
 });
 
 /*
