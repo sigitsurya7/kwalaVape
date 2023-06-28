@@ -32,12 +32,9 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->group('v1', function($routes){
-    // Kategori
-    $routes->post('kategori', 'Kategori::createKategori');
-    $routes->get('kategori', 'Kategori::allKategori');
-    $routes->get('kategori/(:num)', 'Kategori::idKategori/$1');
-    $routes->put('kategori/(:num)', 'Kategori::updateKategori/$1');
-    $routes->delete('kategori/(:num)', 'Kategori::deleteKategori/$1');
+    // Login
+    $routes->post('login', 'Auth::signIn');
+    $routes->post('logout', 'Auth::logoutUser');
 
     // User
     $routes->post('user', 'Users::createUser');
@@ -45,9 +42,19 @@ $routes->group('v1', function($routes){
     $routes->get('user/(:num)', 'Users::getUserId/$1');
     $routes->put('user/(:num)', 'Users::updateUsers/$1');
 
-    // Login
-    $routes->post('login', 'Auth::signIn');
-    $routes->post('logout', 'Auth::logoutUser');
+    // Banner
+    $routes->post('banner', 'Banner::createBanner');
+    $routes->get('banner', 'Banner::getBanner');
+    $routes->get('banner/(:num)', 'Banner::getBannerId/$1');
+    $routes->delete('banner/(:num)', 'Banner::deleteBanner/$1');
+
+    // Kategori
+    $routes->post('kategori', 'Kategori::createKategori');
+    $routes->get('kategori', 'Kategori::allKategori');
+    $routes->get('kategori/(:num)', 'Kategori::idKategori/$1');
+    $routes->put('kategori/(:num)', 'Kategori::updateKategori/$1');
+    $routes->delete('kategori/(:num)', 'Kategori::deleteKategori/$1');
+
 });
 
 /*
