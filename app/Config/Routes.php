@@ -31,6 +31,13 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('fe', function($routes){
+    $routes->get('kategori', 'Kategori::kategoriFe');
+    $routes->get('product', 'Product::productFe');
+    $routes->get('product/(:num)', 'Product::productById/$1');
+    $routes->get('banner', 'Banner::bannerFe');
+});
+
 $routes->group('v1', function($routes){
     // Login
     $routes->post('login', 'Auth::signIn');

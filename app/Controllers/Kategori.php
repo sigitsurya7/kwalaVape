@@ -168,5 +168,13 @@ class Kategori extends ResourceController
 
     }
 
+    public function kategoriFe()
+    {
+        $model = new KategoriModel();
+
+        $data = $model->allK();
+
+        return $this->respond($data, 200);
+    }
 
 }

@@ -133,5 +133,13 @@ class Banner extends ResourceController
         return $this->respond('Unauthorized', 401);
     }
 
+    public function bannerFe()
+    {
+        $model = new BannerModel();
+
+        $data = $model->getBanner();
+
+        return $this->respond($data, 200);
+    }
 
 }
