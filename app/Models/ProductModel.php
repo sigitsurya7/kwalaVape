@@ -46,26 +46,29 @@ class ProductModel extends Model
     }
 
     public function getProductWithDetailsById($productId)
-    {
-        $builder = $this->db->table($this->table);
-        $builder->select('tbl_product.id, tbl_product.product_name, tbl_product.price, tbl_product.description, tbl_product.created_by, tbl_product.updated_by, tbl_product.created_at, tbl_product.updated_at');
-        $builder->where('tbl_product.id', $productId);
-        $query = $builder->get();
-        $product = $query->getRowArray();
+{
+    $builder = $this->db->table($this->table);
+    $builder->select('tbl_product.id, tbl_product.product_name, tbl_product.category, tbl_product.price, tbl_product.description, tbl_product.created_by, tbl_product.updated_by, tbl_product.created_at, tbl_product.updated_at');
+    $builder->where('tbl_product.id', $productId);
+    $query = $builder->get();
+    $product = $query->getResultArray();
 
-        if ($product) {
-            $imageModel = new ImagesModel();
-            $variantModel = new VariantModel();
+    if ($product) {
+        $imageModel = new ImagesModel();
+        $variantModel = new VariantModel();
 
-            $product['images'] = $imageModel->getImagesByProductId($productId);
-            $product['images'] = array_combine(range(1, count($product['images'])), $product['images']);
-            $product['stock'] = $variantModel->getStockByProductId($productId);
-
-            return [$product];
+        foreach ($product as &$item) {
+            $productId = $item['id'];
+            $item['images'] = $imageModel->getImagesByProductId($productId);
+            $item['stock'] = $variantModel->getStockByProductId($productId);
         }
 
-        return [];
+        return $product;
     }
+
+    return [];
+}
+
 
     public function deleteProduct($id)
     {
